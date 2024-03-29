@@ -168,7 +168,6 @@ MDScreenManager:
                                     shadow_offset: (-2, 2)
                                     on_press: app.btn1()
                                     on_release: app.root.current = "second_screen"
-                               
 
 
                                     MDBoxLayout:
@@ -234,6 +233,7 @@ MDScreenManager:
                                     elevation: 4
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
+                                    on_press: app.btn3()
                                     on_release: app.root.current = print("Terminated")
 
 
@@ -254,6 +254,7 @@ MDScreenManager:
                                                 #pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                                 user_font_size: "64sp"  # Adjust the icon size
                                                 on_release: app.root.current = "second"
+                                                on_press: app.btn3()
 
                                         AnchorLayout:
                                             anchor_x:'center'
@@ -276,6 +277,11 @@ MDScreenManager:
                             orientation:"vertical"
                             size_hint: 0.1, 1
 
+                        
+                        
+                                                            
+                            
+
                             MDBoxLayout:
 
                                 #orientation: 'vertical'
@@ -288,15 +294,14 @@ MDScreenManager:
                                     id: volume_slider_1
                                     min: 0
                                     max: 100
-                                    value: 100
-                                    value2 :""
-                                    on_value: app.on_slider_value_change(self.value)
+                                    value:100
                                     orientation: "vertical"
                                     size_hint: 1, 0.9
                                     pos_hint: {'center_x': 0.1}
                                     opacity: 0
-                                    auto_dismiss: True
-                                   
+                                    auto_dismiss: True 
+                                    on_value: app.on_slider_value_change(self.value)
+                                    
 
 
                             MDBoxLayout:
@@ -311,7 +316,7 @@ MDScreenManager:
                                     theme_text_color: "Custom"
                                     text_color: 1, 1, 1, 1
                                     on_release: app.show_volume_slider_1()
-                                    on_release: print("hi")
+                                    #on_release: app.adjust_volume()
                                     icon_size: "38dp"
                                     pos_hint: {'center_x': 0.3, 'center_y': 0.35}
                                     
@@ -348,6 +353,7 @@ MDScreenManager:
                                 text_color: 1, 1, 1, 1  # White color
                                 on_release:print("home button pressed")
                                 icon_size:"38dp"
+                                on_release:app.btn2()
                         
 
                     
@@ -436,6 +442,7 @@ MDScreenManager:
                             text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="first_screen"
                             icon_size:"38dp"
+                            on_release:app.btn2()
 
                     
                     AnchorLayout:                                               #for the logo
@@ -469,7 +476,7 @@ MDScreenManager:
                                 tooltip_text: self.icon
                                 theme_text_color: "Custom"
                                 text_color: 1, 1, 1, 1
-                                on_release: print("Icon pressed")
+                                on_release:app.btn()
                                 icon_size: "38dp"
 
                             MDLabel:
@@ -526,7 +533,8 @@ MDScreenManager:
                                 elevation: 4
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
-                                on_release: print("Terminated")
+                                on_release: app.root.current="third_screen"
+                                on_release: print("localaccess button pressed")
 
 
                                 AnchorLayout:
@@ -534,13 +542,13 @@ MDScreenManager:
                                     anchor_y: 'center'
 
                                     MDIconButton:
-                                        icon: "controller" 
+                                        icon: "gamepad-outline" 
                                         icon_size:"70dp" 
                                         theme_text_color: "Custom"
                                         text_color: 1, 1, 1, 1  # White color
                                         pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
-                                        on_release: app.root.current = "second"
+                                        on_release: app.root.current = "third_screen"
                                 AnchorLayout:
                                     anchor_x: 'center'
                                     anchor_y: 'bottom'
@@ -570,7 +578,7 @@ MDScreenManager:
                                 elevation: 4
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
-                                on_release: print("Terminated")
+                                on_release: app.btn5()
 
                                 AnchorLayout:
                                     anchor_x: 'center'
@@ -583,7 +591,8 @@ MDScreenManager:
                                         text_color: 1, 1, 1, 1  # White color
                                         pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
-                                        on_release: app.root.current = "second"
+                                        #on_release: app.root.current = "second_screen"
+                                        on_release: app.btn5()
                                 AnchorLayout:
                                     anchor_x: 'center'
                                     anchor_y: 'bottom'
@@ -601,7 +610,7 @@ MDScreenManager:
                         
 
 
-                MDBoxLayout:                                                
+                MDBoxLayout:                                                #volume slider in 2nd page
                     orientation:"vertical"
                     size_hint: 0.05, 1
                     
@@ -625,7 +634,7 @@ MDScreenManager:
                             pos_hint: {'center_x': 0.1}
                             opacity: 0
                             auto_dismiss: True
-                            on_value: app.on_slide_1(self.value)
+                            on_value: app.on_slider2(self.value)
 
                     MDBoxLayout:
 
@@ -653,6 +662,801 @@ MDScreenManager:
                 #orientation:"horizontal"
                 size_hint: 1, 0.1
                 md_bg_color:226/255, 80/255, 16/255,1
+
+            
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+
+                    MDIconButton:
+                        icon: "home"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1  # White color
+                        on_release: app.root.current = "first_screen"
+                        icon_size:"38dp"
+
+    #end of the second page    
+        
+
+    #begining of the thirs screen
+
+    MDScreen:
+        name: "third_screen"
+
+
+        MDBoxLayout:                                                    #for the entire layout
+            
+            orientation:"vertical"
+            size_hint: 1, 1
+
+        
+            MDBoxLayout:                                                    #for the top app bar
+                
+                size_hint: 1, 0.1
+                md_bg_color: 1, 1, 1, 1
+
+
+
+                MDGridLayout:                                                   #for divifing into 3
+                    
+                    cols:3
+                    col_default_width: dp(100)
+
+                    AnchorLayout:                                               #for back button
+
+                        anchor_x: 'left'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                        MDIconButton:
+                            icon: "arrow-left"
+                            theme_text_color: "Custom"
+                            text_color: 226/255, 80/255, 16/255,1 
+                            on_release: app.root.current="second_screen"
+                            icon_size:"38dp"
+
+                    
+                    AnchorLayout:                                               #for the logo
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+                        size_hint_x: None
+                        width: dp(300) 
+
+                        
+
+                        Image:
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
+                            size_hint_x: None
+                            width: dp(110) 
+
+                    AnchorLayout:                                               #for the sos button
+                        anchor_x: 'right'
+                        anchor_y: 'center'
+                        padding: [0, 0, dp(10), 0] 
+                
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            #pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+
+                            MDFloatingActionButton:
+                                icon: "alert-octagram"
+                                tooltip_text: self.icon
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                                on_release: print("Icon pressed")
+                                icon_size: "38dp"
+
+                            MDLabel:
+                                text: "SOS"
+                                halign: "center"
+                                bold: True
+                                font_style: "Body2"
+                                theme_text_color: "Custom"
+                                text_color: 226/255, 80/255, 16/255, 1
+                                size_hint_y: None
+                                height: self.texture_size[1] if self.text else 0
+
+            MDBoxLayout:                                                #for the body
+                orientation:"horizontal"
+                size_hint: 1, 0.8
+                md_bg_color:240/255, 240/255, 240/255, 1
+
+                MDBoxLayout:                                                
+                    #orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+
+
+
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.9, 1
+
+
+
+                    MDGridLayout:
+                        rows:2
+
+                        AnchorLayout:                                       #for the Navigate button
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+
+                            MDCard:
+                                radius: 12, 46, 12, 46
+                                size_hint: .4, .6
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                #focus_behavior: True
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
+                                #focus_color: 246/255, 159/255, 33/255,1
+                                elevation: 4
+                                shadow_softness: 8
+                                shadow_offset: (-2, 2)
+                                on_release: app.root.current=print("started navigation")
+
+
+                                AnchorLayout:
+                                    anchor_x: 'center'
+                                    anchor_y: 'center'
+
+                                    MDIconButton:
+                                        icon: "controller" 
+                                        icon_size:"70dp" 
+                                        theme_text_color: "Custom"
+                                        text_color: 1, 1, 1, 1  # White color
+                                        pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
+                                        user_font_size: "64sp"  # Adjust the icon size
+                                        on_release: app.root.current = print("started navigation")
+
+
+                                AnchorLayout:
+                                    anchor_x: 'center'
+                                    anchor_y: 'bottom'
+
+                                    MDLabel:
+                                        text: "Navigate"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+
+
+                        AnchorLayout:                                       #for the Map Building button
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+
+                            MDCard:
+                                radius: 46, 12, 46, 12
+                                size_hint: .4, .6
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                #focus_behavior: True
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
+                                #focus_color: 246/255, 159/255, 33/255,1  
+                                elevation: 4
+                                shadow_softness: 8
+                                shadow_offset: (-2, 2)
+                                on_release: app.root.current = "fourth_screen"
+
+                                on_release: print("MapBuilding button pressed")
+
+                                AnchorLayout:
+                                    anchor_x: 'center'
+                                    anchor_y: 'center'
+
+                                    MDIconButton:
+                                        icon: "map-plus" 
+                                        icon_size:"70dp" 
+                                        theme_text_color: "Custom"
+                                        text_color: 1, 1, 1, 1  # White color
+                                        pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
+                                        user_font_size: "64sp"  # Adjust the icon size
+                                        on_release: app.root.current = "fourth_screen"
+                                AnchorLayout:
+                                    anchor_x: 'center'
+                                    anchor_y: 'bottom'
+
+                                    MDLabel:
+                                        text: "Map \nBuilding"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+
+
+                        
+
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+                    
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1, 0.8
+                        pos_hint: {'center_x': 0.35}
+                                
+                                
+
+                        MDSlider:
+                            id: volume_slider_3
+                            min: 0
+                            max: 100
+                            value: volume_slider_1.value
+                            orientation: "vertical"
+                            size_hint: 1, 0.7
+                            pos_hint: {'center_x': 0.1}
+                            opacity: 0
+                            auto_dismiss: True
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1,0.2
+                                            
+
+                        MDFloatingActionButton:
+                            icon: "volume-high"
+                            tooltip_text: self.icon
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            on_release: app.show_volume_slider_3()
+                            icon_size: "38dp"
+                            pos_hint: {'center_x': 0.3, 'center_y': 0.35}
+
+
+
+            MDBoxLayout:                                                #for the bottom app bar
+                orientation:"horizontal"
+                size_hint: 1, 0.1
+                md_bg_color:226/255, 80/255, 16/255,1 
+
+            
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+
+                    MDIconButton:
+                        icon: "home"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1  # White color
+                        on_release: app.root.current = "first_screen"
+                        icon_size:"38dp"
+
+    #end of the 3rd screen
+
+    MDScreen:
+        name: "fourth_screen"
+
+
+        MDBoxLayout:                                                    #for the entire layout
+            
+            orientation:"vertical"
+            size_hint: 1, 1
+
+        
+            MDBoxLayout:                                                    #for the top app bar
+                
+                size_hint: 1, 0.1
+                md_bg_color: 1, 1, 1, 1
+
+
+
+                MDGridLayout:                                                   #for divifing into 3
+                    
+                    cols:3
+                    col_default_width: dp(100)
+
+                    AnchorLayout:                                               #for back button
+
+                        anchor_x: 'left'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                        MDIconButton:
+                            icon: "arrow-left"
+                            theme_text_color: "Custom"
+                            text_color: 226/255, 80/255, 16/255,1 
+                            on_release: app.root.current="third_screen"
+                            icon_size:"38dp"
+
+                    
+                    AnchorLayout:                                               #for the logo
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+                        size_hint_x: None
+                        width: dp(300) 
+
+                        
+
+                        Image:
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
+                            size_hint_x: None
+                            width: dp(110) 
+
+                    AnchorLayout:                                               #for the sos button
+                        anchor_x: 'right'
+                        anchor_y: 'center'
+                        padding: [0, 0, dp(10), 0] 
+                
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            #pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+
+                            MDFloatingActionButton:
+                                icon: "alert-octagram"
+                                tooltip_text: self.icon
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                                on_release: print("Icon pressed")
+                                icon_size: "38dp"
+
+                            MDLabel:
+                                text: "SOS"
+                                halign: "center"
+                                bold: True
+                                font_style: "Body2"
+                                theme_text_color: "Custom"
+                                text_color: 226/255, 80/255, 16/255, 1
+                                size_hint_y: None
+                                height: self.texture_size[1] if self.text else 0
+
+            MDBoxLayout:                                                #for the body
+                orientation:"horizontal"
+                size_hint: 1, 0.8
+                md_bg_color:240/255, 240/255, 240/255, 1
+
+                MDBoxLayout:                                                
+                    #orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+
+
+
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.9, 1
+
+
+                    MDBoxLayout:                                                
+                        orientation:"horizontal"
+                        size_hint: 1, 0.9
+
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'bottom'
+
+                            MDCard:
+
+                                radius: 46, 12, 46, 12
+                                size_hint: 0.95, 0.9
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                #focus_behavior: True
+                                md_bg_color: "#E25011"
+                                #unfocus_color: 226/255, 80/255, 16/255,1
+                                #focus_color: 246/255, 159/255, 33/255,1
+                                elevation: 4
+                                shadow_softness: 8
+                                shadow_offset: (-2, 2)
+                        
+                    MDBoxLayout:                                                
+                        #orientation:"vertical"
+                        size_hint: 1, 0.1
+
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+
+                            MDFillRoundFlatButton:
+                                text: "[b]Continue[/b]"
+                                markup: True
+                                bold: True
+                                font_size: "18sp"
+                                theme_text_color: "Custom"
+                                md_bg_color: 226/255, 80/255, 16/255,1
+                                text_color: 240/255, 240/255, 240/255,1
+                                on_press: app.root.current = "fifth_screen"
+
+
+                    
+                                
+
+                        
+
+                            
+          
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+                    
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1, 0.8
+                        pos_hint: {'center_x': 0.35}
+                                
+                                
+
+                        MDSlider:
+                            id: volume_slider_4
+                            min: 0
+                            max: 100
+                            value: volume_slider_1.value
+                            orientation: "vertical"
+                            size_hint: 1, 0.7
+                            pos_hint: {'center_x': 0.1}
+                            opacity: 0
+                            auto_dismiss: True
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1,0.2
+                                            
+
+                        MDFloatingActionButton:
+                            icon: "volume-high"
+                            tooltip_text: self.icon
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            on_release: app.show_volume_slider_4()
+                            icon_size: "38dp"
+                            pos_hint: {'center_x': 0.3, 'center_y': 0.35}
+
+
+
+            MDBoxLayout:                                                #for the bottom app bar
+                orientation:"horizontal"
+                size_hint: 1, 0.1
+                md_bg_color:226/255, 80/255, 16/255,1 
+
+            
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+
+                    MDIconButton:
+                        icon: "home"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1  # White color
+                        on_release: app.root.current = "first_screen"
+                        icon_size:"38dp"
+
+#end of the 4th screen 
+
+    MDScreen:
+        name: "fifth_screen"
+
+
+        MDBoxLayout:                                                    #for the entire layout
+            
+            orientation:"vertical"
+            size_hint: 1, 1
+
+        
+            MDBoxLayout:                                                    #for the top app bar
+                
+                size_hint: 1, 0.1
+                md_bg_color: 1, 1, 1, 1
+
+
+
+                MDGridLayout:                                                   #for divifing into 3
+                    
+                    cols:3
+                    col_default_width: dp(100)
+
+                    AnchorLayout:                                               #for back button
+
+                        anchor_x: 'left'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                        MDIconButton:
+                            icon: "arrow-left"
+                            theme_text_color: "Custom"
+                            text_color: 226/255, 80/255, 16/255,1 
+                            on_release: app.root.current="fourth_screen"
+                            icon_size:"38dp"
+
+                    
+                    AnchorLayout:                                               #for the logo
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+                        size_hint_x: None
+                        width: dp(300) 
+
+                        
+
+                        Image:
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
+                            size_hint_x: None
+                            width: dp(110) 
+
+                    AnchorLayout:                                               #for the sos button
+                        anchor_x: 'right'
+                        anchor_y: 'center'
+                        padding: [0, 0, dp(10), 0] 
+                
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            #pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+
+                            MDFloatingActionButton:
+                                icon: "alert-octagram"
+                                tooltip_text: self.icon
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                                on_release: print("Icon pressed")
+                                icon_size: "38dp"
+
+                            MDLabel:
+                                text: "SOS"
+                                halign: "center"
+                                bold: True
+                                font_style: "Body2"
+                                theme_text_color: "Custom"
+                                text_color: 226/255, 80/255, 16/255, 1
+                                size_hint_y: None
+                                height: self.texture_size[1] if self.text else 0
+
+            MDBoxLayout:                                                        #for the body
+                orientation:"horizontal"
+                size_hint: 1, 0.8
+                md_bg_color:240/255, 240/255, 240/255, 1
+
+                MDBoxLayout:                                                
+                    #orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+
+
+
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.9, 1
+
+                    MDBoxLayout:                                                
+                        #orientation:"vertical"
+                        size_hint: 1, 0.1
+
+                    MDBoxLayout:                                                
+                        #orientation:"vertical"
+                        size_hint: 1, 0.8 
+
+                        MDGridLayout:
+                            rows: 2
+                            cols: 3
+
+
+                            AnchorLayout:                                       #for the record button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+                                    on_release:print("recording started")
+
+
+                                    MDLabel:
+                                        text: "Record"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+                                       
+
+                            AnchorLayout:                                       #for the start button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+
+                                    MDLabel:
+                                        text: "Start"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+                            AnchorLayout:                                       #for the stop button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+
+                                    MDLabel:
+                                        text: "Stop"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+
+
+                            AnchorLayout:                                       #for the Build button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+
+                                    MDLabel:
+                                        text: "Build"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+
+
+                            AnchorLayout:                                       #for the View button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+
+                                    MDLabel:
+                                        text: "View"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+
+                            AnchorLayout:                                       #for the save and upload button
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+
+                                MDCard:
+                                    radius: 30, 30, 30, 30
+                                    size_hint: .6, .4
+                                    pos_hint: {"center_x": .5, "center_y": .5}
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    shadow_softness: 8
+                                    shadow_offset: (-2, 2)
+
+                                    MDLabel:
+                                        text: "Save & Upload"
+                                        font_style: "H4"
+                                        #font_size: '30dp'
+                                        bold: True
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color:240/255, 240/255, 240/255, 1
+                                        halign: "center"
+
+
+
+                            
+                    
+                            MDBoxLayout:                                                
+                                #orientation:"vertical"
+                                size_hint: 1, 0.1
+                                
+
+                                        
+
+                        
+                    
+
+                            
+
+                MDBoxLayout:                                                
+                    orientation:"vertical"
+                    size_hint: 0.05, 1
+                    
+                    
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1, 0.8
+                        pos_hint: {'center_x': 0.35}
+                                
+                                
+
+                        MDSlider:
+                            id: volume_slider_5
+                            min: 0
+                            max: 100
+                            value: volume_slider_1.value
+                            orientation: "vertical"
+                            size_hint: 1, 0.7
+                            pos_hint: {'center_x': 0.1}
+                            opacity: 0
+                            auto_dismiss: True
+
+                    MDBoxLayout:
+
+                        #orientation: 'vertical'
+                        size_hint: 1,0.2
+                                            
+
+                        MDFloatingActionButton:
+                            icon: "volume-high"
+                            tooltip_text: self.icon
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            on_release: app.show_volume_slider_5()
+                            icon_size: "38dp"
+                            pos_hint: {'center_x': 0.3, 'center_y': 0.35}
+
+
+
+            MDBoxLayout:                                                #for the bottom app bar
+                orientation:"horizontal"
+                size_hint: 1, 0.1
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
