@@ -1266,6 +1266,7 @@ MDScreenManager:
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
                                     on_release:print("recording started")
+                                    on_release:app.btn7()
 
 
                                     MDLabel:
@@ -1291,6 +1292,8 @@ MDScreenManager:
                                     md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
+                                    on_release:app.btn8()
+
 
                                     MDLabel:
                                         text: "Start"
@@ -1307,12 +1310,14 @@ MDScreenManager:
                                 anchor_y: 'center'
 
                                 MDCard:
+                               
                                     radius: 30, 30, 30, 30
                                     size_hint: .6, .4
                                     pos_hint: {"center_x": .5, "center_y": .5}
                                     md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
+                                    on_release:app.btn11(1)
 
                                     MDLabel:
                                         text: "Stop"
@@ -1323,6 +1328,8 @@ MDScreenManager:
                                         theme_text_color: "Custom"
                                         text_color:240/255, 240/255, 240/255, 1
                                         halign: "center"
+                                        
+
 
 
 
@@ -1337,6 +1344,7 @@ MDScreenManager:
                                     md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
+                                    #on_release:app.btn10()
 
                                     MDLabel:
                                         text: "Build"
@@ -1384,6 +1392,7 @@ MDScreenManager:
                                     md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
+                                    on_release:app.btn11(2)
 
                                     MDLabel:
                                         text: "Save & Upload"
