@@ -11,7 +11,7 @@ import subprocess
 import alsaaudio
 import keyboard 
 import rospy
-from geometry_msgs.msg import Twist
+from std_msgs.msg import Int32
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
@@ -142,27 +142,18 @@ class FirstKVfileApp(MDApp):
 		full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command2}; exec bash\"'"
 		subprocess.Popen(full_command, shell=True) 
 	def btn11(self,h):
-		self.btn9(h)
+		
+		pub = rospy.Publisher('/cmd_vel1', Int32, queue_size=10)
+		pub.publish(h)
+
+
 
 	def btn10(self):
 		catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
 		command2 = f"source {catkin_workspace_path} &&  roslaunch hector_slam_launch tutorial.launch"
 		full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command2}; exec bash\"'"
 		subprocess.Popen(full_command, shell=True) 
-	def btn9(self,h):
-	    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
-	    twist = Twist()
-
-	    if h == 1:
-	        twist.linear.x = 0.1
-	        twist.angular.z = 0
-	        pub.publish(twist)
-
-	    elif h == 2:
-	    	twist.linear.x = 0
-	    	twist.angular.z = 0.1
-	    	pub.publish(twist)
-	    	
+	
 	    	
 
 
@@ -172,12 +163,19 @@ class FirstKVfileApp(MDApp):
 
 
 if __name__=="__main__":
+
     # Window.borderless=True
     catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
-    command2 = f"source {catkin_workspace_path} &&  roscore"
-    full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command2}; exec bash\"'"
+    command3= f"source {catkin_workspace_path} &&  roscore"
+    full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command3}; exec bash\"'"
     subprocess.Popen(full_command, shell=True) 
     rospy.init_node('hello')
+    catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+    command2 = f"source {catkin_workspace_path} && rosrun hello sspub.py"
+    full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command2}; exec bash\"'"
+    subprocess.Popen(full_command, shell=True) 
+	
+
 
 
     FirstKVfileApp().run()
