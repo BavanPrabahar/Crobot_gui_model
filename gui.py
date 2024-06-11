@@ -31,7 +31,7 @@ import rospy
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 a=0
 
-Window.size = (1280,800)
+# Window.size = (1280,800)
 
 
 Colors = {
@@ -78,6 +78,7 @@ class FirstKVfileApp(MDApp):
        
        
         Clock.schedule_interval(self.update_time_date, 1)
+        Clock.schedule_interval(self.update_time_date, 1)
 
         Window.borderless=True
 
@@ -95,8 +96,8 @@ class FirstKVfileApp(MDApp):
         current_date = now.strftime("%d-%m-%Y")
 
         # Update labels
-        self.root.ids.time_label.text = f"Time: {current_time}"
-        self.root.ids.date_label.text = f"Date: {current_date}"
+        self.root.ids.date_label.text = f"{current_time}"
+        self.root.ids.time_label.text = f"{current_date}"
 
     def show_volume_slider_1(self):
         volume_slider_1 = self.root.ids.volume_slider_1
@@ -168,9 +169,9 @@ class FirstKVfileApp(MDApp):
     def close_popup(self, obj):
         self.dialog.dismiss()
 
-    def btn1(self):
+    def btn1(self):#launch
         catkin_workspace_path = "/home/crobot/crobot_ws/devel/setup.bash"
-        command1 = f"source {catkin_workspace_path} && roslaunch ros_teleop ubot_run.launch"
+        command1 = f"source {catkin_workspace_path} && roslaunch ubot ubot_run.launch"
         full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command1}; exec bash\"'"
         try:
             process=subprocess.Popen(full_command,stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -189,12 +190,12 @@ class FirstKVfileApp(MDApp):
             print("An error occurred")
             
         
-    def btn5(self):
+    def btn5(self):#teleoperration
         catkin_workspace_path = "/home/crobot/crobot_ws/devel/setup.bash"
-        command1 = f"source {catkin_workspace_path} && roslaunch hello a.launch"
+        command1 = f"source {catkin_workspace_path} && roslaunch ubot ubot_run.launch"
         full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command1}; exec bash\"'"
         subprocess.Popen(full_command, shell=True)  
-    def btn3(self):
+    def btn3(self):#terminate
         catkin_workspace_path = "/home/crobot/crobot_ws/devel/setup.bash"
         command1 = f"source {catkin_workspace_path} && sudo shutdown now"
         full_command = f"gnome-terminal --tab --title='Tab 1' --command='bash -c \"{command1}; exec bash\"'"
@@ -237,54 +238,46 @@ class FirstKVfileApp(MDApp):
 
         
     def show_wifi_popup(self):
-    
+        wifi_networks, status = self.get_wifi_networks()
 
-        wifi_networks,status = self.get_wifi_networks()
+        content = BoxLayout(orientation='vertical', spacing=10, padding=30, size_hint=(None, None), size=(400, 350))
         
-       
-        content = BoxLayout(orientation='vertical', spacing=10, padding=30, size_hint=(None, None), size=(600, 500))
+        # Switch layout
         switch_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='50dp', padding='10dp')
-        content.add_widget(MDSwitch(pos_hint={'center_x':.9,'center_y':-.1},active=False))
-        wifi_switch = MDSwitch(size_hint_x=None, width='100dp')
+        wifi_switch = MDSwitch(active=False)
         wifi_switch.bind(active=self.on_wifi_switch_active)
+        switch_layout.add_widget(Label( size_hint_x=0.7, width='50dp', halign='right'))
         switch_layout.add_widget(wifi_switch)
-       
-        
-        content.add_widget(Label(text="Available Wi-Fi Networks:"))
+        content.add_widget(switch_layout)
 
+        # Label for available networks
+        content.add_widget(Label(text="Available Wi-Fi Networks:", size_hint_y=None, height='30dp'))
+
+        # Scroll view and grid layout for Wi-Fi networks
         scroll_view = ScrollView(size_hint=(1, 1))
-        grid_layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
+        grid_layout = GridLayout(cols=1, spacing=20, size_hint_y=None)
         grid_layout.bind(minimum_height=grid_layout.setter('height'))
 
-        
         wifi_networks = set(wifi_networks[1:])
-       
         for network in wifi_networks:
-           
             if network.strip() != "SSID":
-                if network.strip() == status.strip() !=None:
-                    print(status)
-                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,1),height=45)
-                    btn.bind(on_press=self.callback)
-                    grid_layout.add_widget(btn)
+                if network.strip() == status.strip():
+                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,1),height=50)
                 else:
-                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,0.2),height=45)
-                    btn.bind(on_press=self.callback)
-                    grid_layout.add_widget(btn)
-            else:
-                continue
-        
+                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,0.2),height=50)
+                btn.bind(on_press=self.callback)
+                grid_layout.add_widget(btn)
 
         scroll_view.add_widget(grid_layout)
         content.add_widget(scroll_view)
 
         wifi_popup = Popup(
             title='Wi-Fi Connections',
-            background_color=(240/255, 240/255, 240/255,0.4),
-            separator_color=(226/255, 80/255, 16/255, 0.5),
             content=content,
             size_hint=(None, None),
-            size=(500,500)
+            size=(400, 350),
+            background_color=(240/255, 240/255, 240/255,0.4),
+            separator_color=(226/255, 80/255, 16/255, 0.5)
         )
         wifi_popup.open()
     def show_popup1(self):
