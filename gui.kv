@@ -59,7 +59,65 @@ MDScreenManager:
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
                         size_hint: 0.2, 1
-                
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 85
+                            
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: self.minimum_size
+
+                                MDFloatingActionButton:
+                                    icon: "wifi"
+                                    theme_text_color: "Custom"
+                                    text_color: 1,1,1,1
+                                    icon_size: "33dp"
+                                    md_bg_color: 226/255, 80/255, 16/255,1
+                                    on_press:app.show_wifi_popup()
+
+                                MDLabel:
+                                    text: "Wi-Fi"
+                                    halign: "center"
+                                    bold: True
+                                    font_style: "Body2"
+                                    theme_text_color: "Custom"
+                                    text_color: 226/255, 80/255, 16/255,1
+                                    size_hint_y: None
+                                    height: self.texture_size[1] if self.text else 0
+         
+                        
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 85
+                            
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: self.minimum_size
+
+                                MDFloatingActionButton:
+                                    id:hello1
+                                    icon: app.icon_name
+                                    theme_text_color: "Custom"
+                                    text_color: 1,1,1,1
+                                    icon_size: "33dp"
+                                    md_bg_color: 226/255, 80/255, 16/255,1
+                                    on_press:app.update_icon()
+                                MDLabel:
+                                    text: "battery"
+                                    halign: "center"
+                                    bold: True
+                                    font_style: "Body2"
+                                    theme_text_color: "Custom"
+                                    text_color: 226/255, 80/255, 16/255,1
+                                    size_hint_y: None
+                                    height: self.texture_size[1] if self.text else 0
+                            
 
                         MDBoxLayout:
                             orientation: 'vertical'

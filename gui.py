@@ -1,6 +1,15 @@
 import kivy
+import sys
 from kivy.config import Config
 from kivymd.app import MDApp
+from kivy.uix.label import Label
+import subprocess
+from kivy.uix.textinput import TextInput
+import shlex
+from kivy.uix.button import Button
+from kivy.uix.popup import Popup
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.textfield import MDTextField
 from kivy.lang import Builder
 from kivy.core.window import Window
 import time
@@ -10,17 +19,17 @@ from kivy.uix.popup import Popup
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivy.properties import NumericProperty
-import subprocess
-import alsaaudio
-import keyboard 
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
+from kivymd.uix.screen import MDScreen
+from kivymd.uix.selectioncontrol import MDSwitch
+from kivy.properties import StringProperty
+from kivy.clock import Clock
 import rospy
-from std_msgs.msg import Int32
-
-
 
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-
+a=0
 
 Window.size = (1280,800)
 
@@ -53,7 +62,9 @@ class FirstKVfileApp(MDApp):
 
     x = NumericProperty(0)
     y = NumericProperty(0)
-
+    b=[]
+    w=None
+    l=None
     def build(self):
 
         self.theme_cls.colors = Colors
@@ -210,7 +221,105 @@ class FirstKVfileApp(MDApp):
         
         pub.publish(h)
                 
+    def callback(self,instance):
+        self.SSID=instance.text
+        a=self.SSID.strip()
+        a=a.replace(' ','\ ')
+        ssid_quoted =f"'{a}'"
+        print(ssid_quoted)
+        command2 = f"nmcli dev wifi connect '{ssid_quoted}'"
+        
+        #catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+        #command2 = f"source {catkin_workspace_path} && {nmcli_command}"
+        full_command = f"gnome-terminal --tab --title='WiFi Scan' -- bash -c '{command2} ; exec bash'"
+        print(full_command)
+        subprocess.run(full_command, shell=True)
 
+        
+    def show_wifi_popup(self):
+    
+
+        wifi_networks,status = self.get_wifi_networks()
+        
+       
+        content = BoxLayout(orientation='vertical', spacing=10, padding=30, size_hint=(None, None), size=(600, 500))
+        switch_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='50dp', padding='10dp')
+        content.add_widget(MDSwitch(pos_hint={'center_x':.9,'center_y':-.1},active=False))
+        wifi_switch = MDSwitch(size_hint_x=None, width='100dp')
+        wifi_switch.bind(active=self.on_wifi_switch_active)
+        switch_layout.add_widget(wifi_switch)
+       
+        
+        content.add_widget(Label(text="Available Wi-Fi Networks:"))
+
+        scroll_view = ScrollView(size_hint=(1, 1))
+        grid_layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
+        grid_layout.bind(minimum_height=grid_layout.setter('height'))
+
+        
+        wifi_networks = set(wifi_networks[1:])
+       
+        for network in wifi_networks:
+           
+            if network.strip() != "SSID":
+                if network.strip() == status.strip() !=None:
+                    print(status)
+                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,1),height=45)
+                    btn.bind(on_press=self.callback)
+                    grid_layout.add_widget(btn)
+                else:
+                    btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,0.2),height=45)
+                    btn.bind(on_press=self.callback)
+                    grid_layout.add_widget(btn)
+            else:
+                continue
+        
+
+        scroll_view.add_widget(grid_layout)
+        content.add_widget(scroll_view)
+
+        wifi_popup = Popup(
+            title='Wi-Fi Connections',
+            background_color=(240/255, 240/255, 240/255,0.4),
+            separator_color=(226/255, 80/255, 16/255, 0.5),
+            content=content,
+            size_hint=(None, None),
+            size=(500,500)
+        )
+        wifi_popup.open()
+    def show_popup1(self):
+        self.root.current="nav"
+        self.wifi_pass()   
+    def wifi_pass(self):
+       
+        pas= self.root.ids.user.text
+        if pas=="1234":
+            Window.minimize()
+    def on_wifi_switch_active(self, switch ,value):
+        if value:
+            print("Wi-Fi switch is ON")
+           
+        else:
+            print("Wi-Fi switch is OFF")
+            
+
+    def update_icon(self,*args):
+        # Simulating the DAC value received
+        dac_value = self.get_dac_value()
+
+        # Update the icon based on the DAC value
+        if dac_value < 10:
+            self.icon_name = "battery-20"
+        elif 10 <= dac_value < 20:
+            self.icon_name = "battery-40"
+        else:
+            self.icon_name = "battery-60"
+
+    def get_dac_value(self):
+        # This method should return the DAC value.
+        # Replace with actual code to get DAC value.
+        import random
+        return random.randint(0, 30)
 
         
   
