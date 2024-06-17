@@ -59,7 +59,7 @@ Colors = {
 
 
 class FirstKVfileApp(MDApp): 
-
+    SSID=None
     x = NumericProperty(0)
     y = NumericProperty(0)
     b=[]
@@ -167,7 +167,7 @@ class FirstKVfileApp(MDApp):
         self.dialog.open()
 
     def close_popup(self, obj):
-        self.dialog.dismiss()
+        self.wifi_popup.dismiss()
 
     def btn1(self):#launch
         catkin_workspace_path = "/home/crobot/crobot_ws/devel/setup.bash"
@@ -221,6 +221,60 @@ class FirstKVfileApp(MDApp):
         pub = rospy.Publisher('/cmd_vel1', Int32, queue_size=10)
         
         pub.publish(h)
+
+    def show_popup(self):
+        self.dialog = MDDialog(
+            title="Hello, User",
+            text="Do you want to proceed with the recorded data?",
+            buttons=[
+                MDFlatButton(
+                    text="[b]START OVER[b]", on_release=self.close_popup
+                ),
+                MDFlatButton(
+                    text="[b]PROCEED[b]", on_release= self.proceed
+                ),
+
+            ],
+        )
+        self.dialog.open()
+
+    def close_popup(self, obj):
+        self.wifi_popup.dismiss()
+
+    def proceed(self, obj):
+        self.root.current="fifth_screen"
+
+        if self.root.current=="fifth_screen":
+            self.dialog.dismiss()
+
+    def get_wifi_networks(self):
+        #catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+        command2= " nmcli -f SSID device wifi list"
+        #command2 = f"source {catkin_workspace_path} && {nmcli_command}"
+        #command3="nmcli radio wifi on"
+        #command2=f"{command21}&&{command3}"
+        full_command = f"gnome-terminal --tab --title='WiFi Scan' -- bash -c '{command2}; exec bash'"
+        subprocess.Popen(full_command, shell=True)
+        p = subprocess.Popen(f"bash -c '{command2}'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+        print(p)
+        while p.poll() is None:
+            self.l = p.stdout.readline()
+            if self.l:
+                
+                self.b.append(self.l)
+                if len(self.b) >= 20:
+                    break
+        command3 = f"nmcli -t -f NAME connection show --active"
+        full_command3 = f"gnome-terminal --tab --title='conn Scan' -- bash -c '{command3}; exec bash'"
+        subprocess.Popen(full_command3, shell=True)
+        p1 = subprocess.Popen(f"bash -c '{command3}'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+      
+        self.w = p1.stdout.readline()
+       
+      
+        return self.b,self.w
+ 
                 
     def callback(self,instance):
         self.SSID=instance.text
