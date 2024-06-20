@@ -1,3 +1,6 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<FirstKVfileApp>:   
 MDScreenManager:
     
     MDScreen:
@@ -30,7 +33,7 @@ MDScreenManager:
                         
 
                         Image:
-                            source: 'crobot2.ef487cbd588e5a44605e.png'   
+                            source:'/home/racer/crobot.png'
                             size_hint_x: None
                             width: dp(110) 
 
@@ -54,11 +57,14 @@ MDScreenManager:
                             text_color:226/255,80/255,17/255,1
                             halign: "center"
 
-                    AnchorLayout:                                               #for the login in the right side
+                    AnchorLayout:                                               #for the Wi-Fi the right side
                         anchor_x: 'right'
                         anchor_y: 'center'
-                        padding: [0, 0, dp(10), 0] 
-                        size_hint: 0.2, 1
+                        padding: [dp(10), dp(10), dp(10), dp(10)] 
+                        size_hint: 0.3, 1
+
+                
+
                         MDBoxLayout:
                             orientation: 'horizontal'
                             size_hint: None, None
@@ -70,13 +76,25 @@ MDScreenManager:
                                 size_hint: None, None
                                 size: self.minimum_size
 
+
+
                                 MDFloatingActionButton:
-                                    icon: "wifi"
+                                    id: my_button
+                                    icon: app.icon_name
                                     theme_text_color: "Custom"
                                     text_color: 1,1,1,1
                                     icon_size: "33dp"
                                     md_bg_color: 226/255, 80/255, 16/255,1
+                                  
+
                                     on_press:app.show_wifi_popup()
+                                    MDSpinner:
+                                        id: spinner
+                                        size_hint: None, None
+                                        size: dp(46), dp(46)
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        active: False  # Initially hidden
+
 
                                 MDLabel:
                                     text: "Wi-Fi"
@@ -89,11 +107,7 @@ MDScreenManager:
                                     height: self.texture_size[1] if self.text else 0
          
                         
-                        MDBoxLayout:
-                            orientation: 'horizontal'
-                            size_hint: None, None
-                            size: self.minimum_size
-                            spacing: 85
+                        
                             
                             MDBoxLayout:
                                 orientation: 'vertical'
@@ -101,51 +115,32 @@ MDScreenManager:
                                 size: self.minimum_size
 
                                 MDFloatingActionButton:
-                                    id:hello1
-                                    icon: app.icon_name
+                                    
+                                    icon: "account-arrow-right"
                                     theme_text_color: "Custom"
+                                    #text_color: 0,0,0,1
                                     text_color: 1,1,1,1
-                                    icon_size: "33dp"
+                                    on_release: print("Icon pressed")
+                                    icon_size: "38dp"
+                                    #md_bg_color: "#f69f21"
                                     md_bg_color: 226/255, 80/255, 16/255,1
-                                    on_press:app.update_icon()
+                                    on_press:app.show_popup1()
+
+
                                 MDLabel:
-                                    text: "battery"
+                                    text: "Log in"
                                     halign: "center"
                                     bold: True
                                     font_style: "Body2"
                                     theme_text_color: "Custom"
+                                    #text_color: "#f69f21"
                                     text_color: 226/255, 80/255, 16/255,1
                                     size_hint_y: None
                                     height: self.texture_size[1] if self.text else 0
-                            
-
-                        MDBoxLayout:
-                            orientation: 'vertical'
-                            size_hint: None, None
-                            size: self.minimum_size
-                            #pos_hint: {'center_x': 0.9, 'center_y': 0.1}
-
-                            MDFloatingActionButton:
-                                icon: "account-arrow-right"
-                                theme_text_color: "Custom"
-                                text_color: 0,0,0,1
-                                on_release: print("Icon pressed")
-                                icon_size: "38dp"
-                                md_bg_color: "#f69f21"
-
-                            MDLabel:
-                                text: "Log in"
-                                halign: "center"
-                                bold: True
-                                font_style: "Body2"
-                                theme_text_color: "Custom"
-                                text_color: "#f69f21"
-                                size_hint_y: None
-                                height: self.texture_size[1] if self.text else 0
-
+                    
                     
                         
-                    
+                        
 
                         
 
@@ -225,7 +220,7 @@ MDScreenManager:
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
                                     on_release: app.root.current = "second_screen"
-                                    #on_press: app.btn1()
+
 
                                     MDBoxLayout:
                                         orientation: "vertical"
@@ -244,8 +239,6 @@ MDScreenManager:
                                                 #pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                                 user_font_size: "64sp"  # Adjust the icon size
                                                 on_release: app.root.current = "second_screen"
-                                                #on_release: app.btn1()
-
 
                                         AnchorLayout:
                                             anchor_x:'center'
@@ -292,7 +285,6 @@ MDScreenManager:
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
                                     on_release: app.root.current = print("Terminated")
-                                    on_release: app.btn3()
 
 
                                     MDBoxLayout:
@@ -312,7 +304,6 @@ MDScreenManager:
                                                 #pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                                 user_font_size: "64sp"  # Adjust the icon size
                                                 on_release: app.root.current = "second"
-                                                on_release: app.btn3()
 
                                         AnchorLayout:
                                             anchor_x:'center'
@@ -331,7 +322,7 @@ MDScreenManager:
                                                 halign: "center"
                     
                     
-                        MDBoxLayout:                        #for volume button                           
+                        MDBoxLayout:                                                     #for volume button                           
                             orientation:"vertical"
                             size_hint: 0.1, 1
 
@@ -352,7 +343,7 @@ MDScreenManager:
                                     id: volume_slider_1
                                     min: 0
                                     max: 100
-                                    value: 50
+                                    value: app.vol
                                     orientation: "vertical"
                                     size_hint: 1, 0.9
                                     pos_hint: {'center_x': 0.1}
@@ -391,12 +382,34 @@ MDScreenManager:
                 md_bg_color: "#E25011"
 
                 MDGridLayout:
-                    cols:3
-                    MDBoxLayout:
-
+                    cols:5
+                   
+                    MDBoxLayout
                         AnchorLayout:
-                            anchor_x: 'left'
-                            anchor_y: 'center'        
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+                
+                                             
+                            
+                            MDIconButton:
+                                id:"bat"
+                                icon:"battery-80"
+                                theme_text_color: "Custom"
+                                text_color: 0,1,0,1 # White color
+                                angle:"180"
+                                icon_size:"38dp"        
+                                canvas.before:
+                                    PushMatrix
+                                    Rotate:
+                                        angle:90 # Example angle
+                                        origin: self.center
+                                canvas.after:
+                                    PopMatrix
+                            
+                                                    
+                                                    
+
+
 
 
                     MDBoxLayout:
@@ -411,7 +424,10 @@ MDScreenManager:
                                 text_color: 1, 1, 1, 1  # White color
                                 on_release:print("home button pressed")
                                 icon_size:"38dp"
-                        
+
+                                            
+                            
+                   
 
                     
                         
@@ -420,12 +436,13 @@ MDScreenManager:
                         AnchorLayout:
                             anchor_x:"center"
                             anchor_y: "center"
+                            
 
                             MDBoxLayout:
                                 orientation: "vertical"
-                                
-                            
-                                  
+           
+
+  
 
                                 MDLabel:
                                     id: date_label
@@ -439,8 +456,7 @@ MDScreenManager:
                                     bold:True
                                     theme_text_color: "Custom"
                                     text_color:240/255, 240/255, 240/255, 1  
-                                    pos_hint: {"center_x": 1, "center_y": .5}  
-
+                                    pos_hint: {"center_x":1.35, "center_y": .5}   
                                 
                                 MDLabel:
                                     id: time_label
@@ -454,9 +470,8 @@ MDScreenManager:
                                     bold:True
                                     theme_text_color: "Custom"
                                     text_color:240/255, 240/255, 240/255, 1
-                                    pos_hint: {"center_x": 1, "center_y": .5}
-
-
+                                    pos_hint: {"center_x": 1.225, "center_y": .5}
+                
     #end of the home page
 
 
@@ -500,7 +515,6 @@ MDScreenManager:
                             text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="first_screen"
                             icon_size:"38dp"
-                            on_release: app.btn4()
 
                     
                     AnchorLayout:                                               #for the logo
@@ -592,7 +606,7 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.root.current="third_screen"
-                                on_release: print("localaccess button pressed")
+                                on_release: app.hel()
 
 
                                 AnchorLayout:
@@ -637,7 +651,7 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: print("Terminated")
-                                on_release: app.btn5()
+                                on_release:app.show()
 
                                 AnchorLayout:
                                     anchor_x: 'center'
@@ -651,7 +665,7 @@ MDScreenManager:
                                         pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         #on_release: app.root.current = "second_screen"
-                                        on_release: app.btn5()
+                                        on_release:app.show()
                                 AnchorLayout:
                                     anchor_x: 'center'
                                     anchor_y: 'bottom'
@@ -720,6 +734,7 @@ MDScreenManager:
                 #orientation:"horizontal"
                 size_hint: 1, 0.1
                 md_bg_color:226/255, 80/255, 16/255,1
+
 
             
                 AnchorLayout:
@@ -877,7 +892,7 @@ MDScreenManager:
                                     anchor_y: 'bottom'
 
                                     MDLabel:
-                                        text: "Navigate"
+                                        text: "Tele\noperation"
                                         font_style: "H4"
                                         #font_size: '30dp'
                                         bold: True
@@ -1352,7 +1367,6 @@ MDScreenManager:
                                     md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
-                                  
 
                                     MDLabel:
                                         text: "Build"
@@ -1363,7 +1377,6 @@ MDScreenManager:
                                         theme_text_color: "Custom"
                                         text_color:240/255, 240/255, 240/255, 1
                                         halign: "center"
-                                        
 
 
 
@@ -1601,7 +1614,6 @@ MDScreenManager:
                                 md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
-                                on_release: app.btn7()
 
                                 MDLabel:
                                     text: "Start"
@@ -1626,7 +1638,6 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.show_popup()
-                                on_release: app.btn8()
 
                                 MDLabel:
                                     text: "Stop"
@@ -1637,7 +1648,7 @@ MDScreenManager:
                                     theme_text_color: "Custom"
                                     text_color:240/255, 240/255, 240/255, 1
                                     halign: "center"
-                                    
+
 
                             
 
@@ -1827,7 +1838,6 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_up()
-                                on_release: app.btn9(1)
 
                                 AnchorLayout:                                       
                                     anchor_x: 'center'
@@ -1842,7 +1852,6 @@ MDScreenManager:
                                         pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         on_release: app.move_up()
-                                        on_release: app.btn9(1)
 
                         
                            
@@ -1867,7 +1876,6 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_left()
-                                on_release: app.btn9(4)
 
                                 AnchorLayout:                                      
                                     anchor_x: 'center'
@@ -1882,7 +1890,6 @@ MDScreenManager:
                                         pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         on_release: app.move_left()
-                                        on_release: app.btn9(4)
 
                         AnchorLayout:                                      #for right button
                             anchor_x: 'center'
@@ -1896,7 +1903,6 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_right()
-                                on_release: app.btn9(3)
 
                                 AnchorLayout:                                      
                                     anchor_x: 'center'
@@ -1911,7 +1917,6 @@ MDScreenManager:
                                         pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         on_release: app.move_right()
-                                        on_release: app.btn9(3)
 
                     MDBoxLayout:
                         size_hint: 1, 0.33
@@ -1929,7 +1934,6 @@ MDScreenManager:
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release:app.move_down()
-                                on_release: app.btn9(2)
 
                                 AnchorLayout:                                       
                                     anchor_x: 'center'
@@ -1944,7 +1948,6 @@ MDScreenManager:
                                         pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         on_release: app.move_down()
-                                        on_release: app.btn9(2)
                           
 
                         
@@ -2018,3 +2021,110 @@ MDScreenManager:
                         text_color: 1, 1, 1, 1  # White color
                         on_release: app.root.current = "first_screen"
                         icon_size:"38dp"
+    MDScreen:
+        name: "nav"
+        MDCard:
+            size_hint:None,None
+            size:300,400
+            pos_hint:{"center_x":0.5,"center_y":0.5}
+            elevation:10
+            padding:25
+            spacing:25
+            orientation:'vertical'
+            AnchorLayout:                                               #for back button
+
+                anchor_x: 'left'
+                anchor_y: 'center'
+                padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                MDIconButton:
+                    icon: "arrow-left"
+                    theme_text_color: "Custom"
+                    text_color: 226/255, 80/255, 16/255,1 
+                    on_release: app.kill()
+                    on_release: app.root.current = "first_screen"
+                    icon_size:"38dp"
+           
+            MDTextField:
+                id: user
+                hint_text: "Enter password"
+                icon_right: "eye-off"
+                size_hint_x: None
+                width: 200
+                font_size: 10
+                pos_hint: {"center_x": 0.5}
+            
+
+            Widget:
+                size_hint_y: None
+                height: 15
+       
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+                MDRoundFlatButton:
+                    text: "submit"
+                    text_color: "black"
+                    size_hint: None, None
+                    size: 150, 40
+                    on_press:app.wifi_pass()
+
+    MDScreen:
+        name: "nav1"
+        MDCard:
+          
+            size_hint:None,None
+            size:300,400
+            pos_hint:{"center_x":0.5,"center_y":0.5}
+            elevation:10
+            padding:25
+            spacing:25
+            orientation:'vertical'
+            AnchorLayout:                                               #for back button
+
+                anchor_x: 'left'
+                anchor_y: 'center'
+                padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                MDIconButton:
+                    icon: "arrow-left"
+                    theme_text_color: "Custom"
+                    text_color: 226/255, 80/255, 16/255,1 
+                    on_release: app.kill()
+                    on_release: app.root.current = "second_screen"
+                    icon_size:"38dp"
+                    
+  
+        
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+
+                Image:
+                    source: '/home/racer/crobot.png'   
+                    size_hint_x: None
+                    width: dp(200) 
+
+                
+           
+        
+            
+            MDBoxLayout:
+                id: box
+                adaptive_size: True
+                spacing: "56dp"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                
+                MDIconButton:
+                    icon: "loading"
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1  # Black color
+                    halign: 'center'
+                    icon_size: "70dp"
+                    canvas.before:
+                        PushMatrix
+                        Rotate:
+                            angle: app.angle  # Bind to app.angle
+                            origin: self.center
+                    canvas.after:
+                        PopMatrix
