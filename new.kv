@@ -33,7 +33,7 @@ MDScreenManager:
                         
 
                         Image:
-                            source:'/home/racer/crobot.png'
+                            source:'crobot2.ef487cbd588e5a44605e.png'
                             size_hint_x: None
                             width: dp(110) 
 
@@ -44,7 +44,7 @@ MDScreenManager:
                         #padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
                         size_hint_x: None
                         width: dp(300) 
-                        size_hint: 0.6, 1
+                        size_hint: 0.9, 1
 
                         
 
@@ -69,7 +69,7 @@ MDScreenManager:
                             orientation: 'horizontal'
                             size_hint: None, None
                             size: self.minimum_size
-                            spacing: 85
+                            spacing: 70
                             
                             MDBoxLayout:
                                 orientation: 'vertical'
@@ -368,14 +368,7 @@ MDScreenManager:
                                     #on_release: app.adjust_volume()
                                     icon_size: "38dp"
                                     pos_hint: {'center_x': 0.3, 'center_y': 0.35}
-                                    
-
-                                    
-
-                            
-                                
-
-                                        
+            
             MDBoxLayout:                                                #for the bottom app bar
                 #orientation:"horizontal"
                 size_hint: 1, 0.1
@@ -384,33 +377,15 @@ MDScreenManager:
                 MDGridLayout:
                     cols:5
                    
-                    MDBoxLayout
+                    MDBoxLayout:
                         AnchorLayout:
                             anchor_x: 'center'
                             anchor_y: 'center'
-                
-                                             
-                            
-                            MDIconButton:
-                                id:"bat"
-                                icon:"battery-80"
-                                theme_text_color: "Custom"
-                                text_color: 0,1,0,1 # White color
-                                angle:"180"
-                                icon_size:"38dp"        
-                                canvas.before:
-                                    PushMatrix
-                                    Rotate:
-                                        angle:90 # Example angle
-                                        origin: self.center
-                                canvas.after:
-                                    PopMatrix
-                            
+
+                    MDBoxLayout:
+                   
                                                     
                                                     
-
-
-
 
                     MDBoxLayout:
 
@@ -426,7 +401,7 @@ MDScreenManager:
                                 icon_size:"38dp"
 
                                             
-                            
+                    MDBoxLayout:       
                    
 
                     
@@ -436,43 +411,78 @@ MDScreenManager:
                         AnchorLayout:
                             anchor_x:"center"
                             anchor_y: "center"
-                            
 
-                            MDBoxLayout:
-                                orientation: "vertical"
-           
 
-  
+                            MDGridLayout:
+                                cols:2  
 
-                                MDLabel:
-                                    id: date_label
-                                    font_size: 20
-                                    text: " "
-                                    #halign:"center"  
-                                    font_name: "Roboto"
-                                    font_size: '20dp'
-                                    size_hint: 1, 0.5
-                                    markup: True
-                                    bold:True
-                                    theme_text_color: "Custom"
-                                    text_color:240/255, 240/255, 240/255, 1  
-                                    pos_hint: {"center_x":1.35, "center_y": .5}   
-                                
-                                MDLabel:
-                                    id: time_label
-                                    font_size: 30
-                                    text: ""
-                                    #halign:"center"
-                                    font_name: "Roboto"
-                                    font_size: '20dp'
-                                    size_hint: 1, 0.5
-                                    markup: True
-                                    bold:True
-                                    theme_text_color: "Custom"
-                                    text_color:240/255, 240/255, 240/255, 1
-                                    pos_hint: {"center_x": 1.225, "center_y": .5}
+
+                                AnchorLayout:
+                                    anchor_x:"center"
+                                    anchor_y: "center"
+
+                                    MDIconButton:
+                                        id:"bat"
+                                        icon: "battery-80"
+                                        theme_text_color: "Custom"
+                                        text_color: 1,1,1,1 # White color
+                                        angle:"180"
+                                        icon_size:"38dp"        
+                                        canvas.before:
+                                            PushMatrix
+                                            Rotate:
+                                                angle:270 # Example angle
+                                                origin: self.center
+                                        canvas.after:
+                                            PopMatrix
+
+                                AnchorLayout:
+                                    anchor_x:"center"
+                                    anchor_y: "center"
+
+                                    MDBoxLayout:
+                                        orientation: "vertical"
                 
-    #end of the home page
+
+        
+
+                                        MDLabel:
+                                            id: date_label
+                                            font_size: 20
+                                            text: " "
+                                            #halign:"center"  
+                                            font_name: "Roboto"
+                                            font_size: '20dp'
+                                            size_hint: 1, 0.5
+                                            markup: True
+                                            bold:True
+                                            theme_text_color: "Custom"
+                                            text_color:240/255, 240/255, 240/255, 1  
+                                            #pos_hint: {"center_x":1.35, "center_y": .5}   
+                                        
+                                        MDLabel:
+                                            id: time_label
+                                            font_size: 30
+                                            text: ""
+                                            #halign:"center"
+                                            font_name: "Roboto"
+                                            font_size: '20dp'
+                                            size_hint: 1, 0.5
+                                            markup: True
+                                            bold:True
+                                            theme_text_color: "Custom"
+                                            text_color:240/255, 240/255, 240/255, 1
+                                            #pos_hint: {"center_x": 1.225, "center_y": .5}
+                        
+            #end of the home page                                    
+
+                                    
+
+                            
+                                
+
+                                        
+
 
 
 
@@ -2070,61 +2080,157 @@ MDScreenManager:
                     on_press:app.wifi_pass()
 
     MDScreen:
-        name: "nav1"
-        MDCard:
-          
-            size_hint:None,None
-            size:300,400
-            pos_hint:{"center_x":0.5,"center_y":0.5}
-            elevation:10
-            padding:25
-            spacing:25
-            orientation:'vertical'
-            AnchorLayout:                                               #for back button
+        name: "nav1" 
 
-                anchor_x: 'left'
-                anchor_y: 'center'
-                padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
-
-                MDIconButton:
-                    icon: "arrow-left"
-                    theme_text_color: "Custom"
-                    text_color: 226/255, 80/255, 16/255,1 
-                    on_release: app.kill()
-                    on_release: app.root.current = "second_screen"
-                    icon_size:"38dp"
-                    
-  
-        
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'center'
-
-                Image:
-                    source: '/home/racer/crobot.png'   
-                    size_hint_x: None
-                    width: dp(200) 
-
-                
-           
-        
+        MDBoxLayout:                                                    #for the entire layout
             
-            MDBoxLayout:
-                id: box
-                adaptive_size: True
-                spacing: "56dp"
-                pos_hint: {"center_x": .5, "center_y": .5}
+            orientation:"vertical"
+            size_hint: 1, 1
+
+        
+            MDBoxLayout:                                                    #for the top app bar
                 
-                MDIconButton:
-                    icon: "loading"
-                    theme_text_color: "Custom"
-                    text_color: 0, 0, 0, 1  # Black color
-                    halign: 'center'
-                    icon_size: "70dp"
-                    canvas.before:
-                        PushMatrix
-                        Rotate:
-                            angle: app.angle  # Bind to app.angle
-                            origin: self.center
-                    canvas.after:
-                        PopMatrix
+                size_hint: 1, 0.1
+                md_bg_color: 1, 1, 1, 1
+
+
+
+                MDGridLayout:                                                   #for divifing into 3
+                    
+                    cols:3
+                    col_default_width: dp(100)
+
+                    AnchorLayout:                                               #for back button
+
+                        anchor_x: 'left'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+
+                        MDIconButton:
+                            icon: "arrow-left"
+                            theme_text_color: "Custom"
+                            text_color: 226/255, 80/255, 16/255,1 
+                            on_release: app.root.current="second_screen"
+                            icon_size:"38dp"
+
+                    
+                    AnchorLayout:                                               #for the logo
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+                        size_hint_x: None
+                        width: dp(300) 
+
+                        
+
+                        Image:
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
+                            size_hint_x: None
+                            width: dp(110) 
+
+                    AnchorLayout:                                               #for the sos button
+                        anchor_x: 'right'
+                        anchor_y: 'center'
+                        padding: [0, 0, dp(10), 0] 
+                
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            #pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+
+                            MDFloatingActionButton:
+                                icon: "alert-octagram"
+                                tooltip_text: self.icon
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                                on_release: print("Icon pressed")
+                                icon_size: "38dp"
+
+                            MDLabel:
+                                text: "SOS"
+                                halign: "center"
+                                bold: True
+                                font_style: "Body2"
+                                theme_text_color: "Custom"
+                                text_color: 226/255, 80/255, 16/255, 1
+                                size_hint_y: None
+                                height: self.texture_size[1] if self.text else 0
+
+
+            MDBoxLayout:                                                        #for the body
+                #orientation:"horizontal"
+                size_hint: 1, 0.8
+                md_bg_color:240/255, 240/255, 240/255, 1
+
+                AnchorLayout:
+                    anchor_x: "center"
+                    anchor_y: "center"       
+        
+                    MDCard:
+                    
+                        size_hint:None,None
+                        size:300,400
+                        pos_hint:{"center_x":0.5,"center_y":0.5}
+                        elevation:0
+                        padding:25
+                        spacing:25
+                        orientation:'vertical'
+
+            
+                    
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+
+                            MDLabel:
+                                text: "Loading..."
+                                font_style: "H4"
+                                #font_size: '30dp'
+                                bold: True
+                                theme_text_color: "Custom"
+                                text_color:226/255,80/255,17/255,1
+                                halign: "center"
+
+
+                            
+                    
+                    
+                        
+                        MDBoxLayout:
+                            id: box
+                            adaptive_size: True
+                            spacing: "56dp"
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            
+                            MDIconButton:
+                                icon: "loading"
+                                theme_text_color: "Custom"
+                                text_color: 226/255, 80/255, 16/255,1 
+                                halign: 'center'
+                                icon_size: "70dp"
+                                canvas.before:
+                                    PushMatrix
+                                    Rotate:
+                                        angle: app.angle  # Bind to app.angle
+                                        origin: self.center
+                                canvas.after:
+                                    PopMatrix
+
+            MDBoxLayout:                                                #for the bottom app bar
+                orientation:"horizontal"
+                size_hint: 1, 0.1
+                md_bg_color:226/255, 80/255, 16/255,1 
+
+            
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+
+                    MDIconButton:
+                        icon: "home"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1  # White color
+                        on_release: app.root.current = "first_screen"
+                        icon_size:"38dp"
