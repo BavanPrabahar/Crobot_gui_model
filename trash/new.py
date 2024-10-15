@@ -36,16 +36,15 @@ import alsaaudio
 from kivy.input.providers.mouse import MouseMotionEvent
 from kivy.graphics import *
 from kivymd.uix.spinner import MDSpinner
-from kivy.graphics.svg import Svg
 a=0
 Window.size = (1280,800)
 
 
 Colors = {
     "Orange": {
-        "200": "#009CA6",
-        "500": "#009CA6",
-        "700": "#009CA6",
+        "200": "#E25011",
+        "500": "#E25011",
+        "700": "#E25011",
     },
     "White": {
         "200": "#EEEEEE",
@@ -201,23 +200,58 @@ class FirstKVfileApp(MDApp):
     def kill(self):
 
 
-        catkin_workspace_path = "/home/racer/ros2_ws/install/setup.bash"
+        catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
         command1 = f"source {catkin_workspace_path} && rosnode kill --all"
         full_command = f"gnome-terminal --tab --title='Tab 1' -- bash -c \"{command1}; echo; echo 'Output captured, closing in 5 seconds...'; sleep 5; exit\""
         subprocess.Popen(full_command, shell=True)
-    def hell(self):
-        catkin_workspace_path = "/home/racer/ros2_ws/install/setup.bash"
-        command1 = f"source {catkin_workspace_path} && ros2 run teleop_twist_keyboard teleop_twist_keyboard"
-        full_command = f"gnome-terminal --title='Tab 1' -- bash -c \"{command1}; echo; echo 'Output captured, closing in 5 seconds...'; sleep 5; exit\""
+    def sed(self):
+
+
+        catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+        command1 = f"source {catkin_workspace_path} && rosnode kill --all"
+        full_command = f"gnome-terminal --tab --title='Tab 1' -- bash -c \"{command1}; echo; echo 'Output captured, closing in 5 seconds...'; sleep 5; exit\""
         subprocess.Popen(full_command, shell=True)
+
     def show(self):
         self.root.current="nav1"
 
 
-        catkin_workspace_path = "/home/racer/ros2_ws/install/setup.bash"
-        command1 = f"source {catkin_workspace_path} && ros2 run teleop_twist_keyboard teleop_twist_keyboard.py"
+        catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+        command1 = f"source {catkin_workspace_path} && rosrun teleop_twist_keyboard teleop_twist_keyboard.py"
         full_command = f"gnome-terminal --tab --title='Tab 1' -- bash -c \"{command1}; echo; echo 'Output captured, closing in 5 seconds...'; sleep 5; exit\""
         subprocess.Popen(full_command, shell=True)
+    def get_blue_networks(self):
+        co="bluetoothctl power on "
+        ful = f"gnome-terminal --tab --title='z' -- bash -c '{co}; echo; echo \"Output captured, closing in 5 seconds...\"; sleep 5; exit'"
+        subprocess.Popen(ful, shell=True)
+        p2=subprocess.Popen(f"bash -c '{co}'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+
+        
+            #catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
+        command2= "bluetoothctl devices"
+            #command2 = f"source {catkin_workspace_path} && {nmcli_command}"
+            #command3="nmcli radio wifi "
+            #command2=f"{command21}&&{command3}"
+        full_command = f"gnome-terminal --tab --title='WiFi Scan' -- bash -c '{command2}; echo; echo \"Output captured, closing in 5 seconds...\"; sleep 5; exit'"
+            
+        subprocess.Popen(full_command, shell=True)
+        p= subprocess.Popen(f"bash -c '{command2}'", shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            
+        while p.poll() is None:
+            self.l = p.stdout.readline()
+            if self.l:
+                    
+                self.b.append(self.l)
+                    
+                if len(self.b) >= 20:
+                    break
+        pyautogui.hotkey('ctrl', 'c')
+
+       
+      
+        return self.b
+ 
 
 
     def show_popup(self):
@@ -237,7 +271,7 @@ class FirstKVfileApp(MDApp):
         self.dialog.open()
     
     def hel(self):
-        catkin_workspace_path = "/home/racer/ros2_ws/install/setup.bash"
+        catkin_workspace_path = "/home/racer/catkin_ws/devel/setup.bash"
         command1 = f"source {catkin_workspace_path} && rosrun teleop_twist_keyboard teleop_twist_keyboard.py"
         full_command = f"gnome-terminal --title='Tab 1' -- bash -c \"{command1}; echo; echo 'Output captured, closing in seconds...'; exit\""
         subprocess.Popen(full_command, shell=True)
@@ -307,7 +341,7 @@ class FirstKVfileApp(MDApp):
         a=a.replace("'","\'")
         a=a.replace("^",'\^')
         ssid_quoted =f"'{a}'"
-        print(ssid_quoted)
+        print(ssid_quoted[27:])
         
         command2 = f"nmcli dev wifi connect '{ssid_quoted}'"
         
@@ -359,6 +393,57 @@ class FirstKVfileApp(MDApp):
     #     p1.join()
     #     p2.join()
 
+    def show_blue_popup(self,*args):
+
+        self.root.ids.spinner.active = True
+        
+        wifi_networks= self.get_blue_networks()
+
+        content = BoxLayout(orientation='vertical', spacing=10, padding=30, size_hint=(None, None), size=(550, 450))
+        
+        # Switch layout
+        switch_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='50dp', padding='10dp')
+        
+        self.blue_switch = MDSwitch()
+        
+
+        self.blue_switch.active=True
+    
+        switch_layout.add_widget(Label( size_hint_x=1, width='100dp', halign='right'))
+        switch_layout.add_widget(self.blue_switch)
+        content.add_widget(switch_layout)
+        self.blue_switch.bind(active=self.on_wifi_switch_active)
+        # Label for available networks
+        content.add_widget(Label(text="Available Wi-Fi Networks:", size_hint_y=None, height='30dp'))
+    
+        # Scroll view and grid layout for Wi-Fi networks
+        scroll_view = ScrollView(size_hint=(1, 1))
+        grid_layout = GridLayout(cols=1, spacing=20, size_hint_y=None)
+        grid_layout.bind(minimum_height=grid_layout.setter('height'))
+
+        wifi_networks = set(wifi_networks[1:-1])
+
+
+        for network in wifi_networks:
+    
+            btn = Button(text=network, size_hint_y=None,background_color=(240/255, 240/255, 240/255,0.2),height=50)
+            btn.bind(on_press=self.callback)
+            grid_layout.add_widget(btn)
+
+        
+        scroll_view.add_widget(grid_layout)
+        content.add_widget(scroll_view)
+
+        self.wifi_popup = Popup(
+            title='Wi-Fi Connections',
+            content=content,
+            size_hint=(None, None),
+            size=(550, 450),
+            background_color=(240/255, 240/255, 240/255,0.4),
+            separator_color=(226/255, 80/255, 16/255, 0.5)
+        )
+        self.wifi_popup.open()
+        self.icon_name="wifi"
   
         
     def show_wifi_popup(self,*args):
@@ -434,7 +519,7 @@ class FirstKVfileApp(MDApp):
             Window.minimize()
     def on_wifi_switch_active(self, switch ,value):
         
-        print(value)
+        print(value[10:])
         if value==True:
 
             self.t=0
@@ -508,7 +593,5 @@ class FirstKVfileApp(MDApp):
 
 
 if __name__=="__main__":
-    # Window.borderless=True
 
-    #Window.fullscreen = 'auto'
     FirstKVfileApp().run()

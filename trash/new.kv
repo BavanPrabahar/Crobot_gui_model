@@ -24,29 +24,18 @@ MDScreenManager:
                     cols:3
                     col_default_width: dp(100)
 
-                    AnchorLayout:                                               #for left side 20240910_195634.png
+                    AnchorLayout:                                               #for left side logo
 
-                        md_bg_color: "#009CA6"            
                         anchor_x: 'left'
                         anchor_y: 'center'
-                        padding: [dp(10), dp(10), 0, dp(10)]  # Adjust the padding here
-                        size_hint: 0.25, 1
+                        padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
+                        size_hint: 0.2, 1
                         
 
-                        MDCard:
-                            orientation: 'vertical'
-                            size_hint: 0.8, 1
-                            
-                            Image:
-                                source:'20240910_195634.png'
-                                size_hint: 1, 1
-                                allow_stretch: True
-                                keep_ratio: False
-                                #pos_hint: {"center_x": 0.5, "center_y": 0.5}
-
-
-
-                        
+                        Image:
+                            source:'crobot2.ef487cbd588e5a44605e.png'
+                            size_hint_x: None
+                            width: dp(110) 
 
                     
                     AnchorLayout:                                               #for the title
@@ -60,12 +49,12 @@ MDScreenManager:
                         
 
                         MDLabel:
-                            text: "CYIENTIFIQ EXPERIENCE CENTER"
+                            text: "CROBOT TECHNOLOGIES PRIVATE LIMITED"
                             font_style: "H4"
                             #font_size: '30dp'
                             bold: True
                             theme_text_color: "Custom"
-                            text_color:0/255,156/255,166/255,1
+                            text_color:226/255,80/255,17/255,1
                             halign: "center"
 
                     AnchorLayout:                                               #for the Wi-Fi the right side
@@ -93,10 +82,9 @@ MDScreenManager:
                                     id: my_button
                                     icon: app.icon_name
                                     theme_text_color: "Custom"
-                                    md_bg_color: "#009CA6"             
                                     text_color: 1,1,1,1
                                     icon_size: "33dp"
-                                    md_bg_color: 0, 156/255, 166/255, 1
+                                    md_bg_color: 226/255, 80/255, 16/255,1
                                   
 
                                     on_press:app.show_wifi_popup()
@@ -114,10 +102,57 @@ MDScreenManager:
                                     bold: True
                                     font_style: "Body2"
                                     theme_text_color: "Custom"
-                                    text_color: 0, 156/255, 166/255, 1
+                                    text_color: 226/255, 80/255, 16/255,1
                                     size_hint_y: None
                                     height: self.texture_size[1] if self.text else 0
-                               
+                    AnchorLayout:                                               #for the Wi-Fi the right side
+                        anchor_x: 'right'
+                        anchor_y: 'center'
+                        padding: [dp(10), dp(10), dp(10), dp(10)] 
+                        size_hint: 0.3, 1
+
+                
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 70
+                            
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: self.minimum_size
+
+
+
+                                MDFloatingActionButton:
+                                    id: my_button
+                                    icon: app.icon_name
+                                    theme_text_color: "Custom"
+                                    text_color: 1,1,1,1
+                                    icon_size: "33dp"
+                                    md_bg_color: 226/255, 80/255, 16/255,1
+                                  
+
+                                    on_press:app.show_blue_popup()
+                                    MDSpinner:
+                                        id: spinner
+                                        size_hint: None, None
+                                        size: dp(46), dp(46)
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        active: False  # Initially hidden
+
+
+                                MDLabel:
+                                    text: "Wi-Fi"
+                                    halign: "center"
+                                    bold: True
+                                    font_style: "Body2"
+                                    theme_text_color: "Custom"
+                                    text_color: 226/255, 80/255, 16/255,1
+                                    size_hint_y: None
+                                    height: self.texture_size[1] if self.text else 0        
                         
                         
                             
@@ -135,7 +170,7 @@ MDScreenManager:
                                     on_release: print("Icon pressed")
                                     icon_size: "38dp"
                                     #md_bg_color: "#f69f21"
-                                    md_bg_color: 0, 156/255, 166/255, 1
+                                    md_bg_color: 226/255, 80/255, 16/255,1
                                     on_press:app.show_popup1()
 
 
@@ -146,7 +181,7 @@ MDScreenManager:
                                     font_style: "Body2"
                                     theme_text_color: "Custom"
                                     #text_color: "#f69f21"
-                                    text_color: 0, 156/255, 166/255, 1
+                                    text_color: 226/255, 80/255, 16/255,1
                                     size_hint_y: None
                                     height: self.texture_size[1] if self.text else 0
                     
@@ -158,7 +193,7 @@ MDScreenManager:
 
             MDBoxLayout:                                                #for the body
                 orientation:"vertical"
-                size_hint: 1, 0.75
+                size_hint: 1, 0.8
                 #md_bg_color:240/255, 240/255, 240/255, 
 
 
@@ -173,40 +208,25 @@ MDScreenManager:
                         anchor_y: 'top'
                         padding: [dp(30), 0, dp(30), 0]
 
-                        MDBoxLayout:
-                            orientation:"vertical"
 
+                        MDLabel:
+                            text: "[color=#E25011]UBOT[/color]\n[color=#E25011](Telepresence Robot)[/color]"
+                            font_style: "H4"
+                            #font_size: '30dp'
+                            bold: True
+                            markup: True
+                            halign: "center"
+                            #theme_text_color: "Custom"
+                            #text_color:226/255,80/255,17/255,1
 
-                            MDLabel:
-                                text: "[color=#009CA6]UBOT[/color]"
-                                font_style: "H4"
-                                font_size: '40dp'
-                                bold: True
-                                markup: True
-                                halign: "center"
-
-                            MDLabel:
-                                text: "[color=#009CA6]Powered by[/color]"
-                                font_style: "H4"
-                                #font_size: '30dp'
-                                bold: False
-                                markup: True
-                                halign: "center"
-
-                            MDLabel:
-                                text: "[color=#009CA6]Crobot Technologies[/color]"
-                                font_style: "H4"
-                                #font_size: '30dp'
-                                bold: True
-                                markup: True
-                                halign: "center"   
+                
 
                     
 
 
                 MDBoxLayout:                                                    #for the start and stop button layout
                     orientation:"horizontal"
-                    size_hint: 1, 0.75
+                    size_hint: 1, 0.8
                     md_bg_color:240/255, 240/255, 240/255,1
 
 
@@ -215,8 +235,8 @@ MDScreenManager:
                     MDBoxLayout:                                                   #for the launch button
                         #orientation:"horizontal"
                         size_hint: 0.5, 1
-                        md_bg_color:240/255, 240/255, 240/255,1           
-                        
+                        md_bg_color:240/255, 240/255, 240/255,1
+
                         MDBoxLayout:                                                   
                             #orientation:"horizontal"
                             size_hint: 0.1, 1
@@ -230,18 +250,18 @@ MDScreenManager:
                             
 
                             AnchorLayout:
-                                anchor_x: 'center'                   
+                                anchor_x: 'center'
                                 anchor_y: 'center'
                                 
-                                
+
                                 MDCard:
-                                    md_bg_color: "#009CA6"
+
                                     radius: 46, 46, 46, 46
                                     size_hint: .4, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
                                     #focus_behavior: True
-                                    md_bg_color: "#009CA6"
-                                    unfocus_color: 0, 156/255, 166/255, 1
+                                    md_bg_color: "#E25011"
+                                    unfocus_color: 226/255, 80/255, 16/255,1
                                     #focus_color: 200/255, 200/255, 200/255,1
                                     elevation: 4
                                     shadow_softness: 8
@@ -273,7 +293,7 @@ MDScreenManager:
 
 
                                             MDLabel:
-                                                text: "Start"
+                                                text: "Launch"
                                                 font_style: "H4"
                                                 #font_size: '30dp'
                                                 size_hint: 1, 0.5
@@ -300,13 +320,13 @@ MDScreenManager:
                                 anchor_y: 'center'
 
                                 MDCard:
-                                    md_bg_color: "#009CA6"
+
                                     radius: 46, 46, 46, 46
                                     size_hint: .4, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
                                     #focus_behavior: True
-                                    md_bg_color:0, 156/255, 166/255, 1
-                                    #unfocus_color: 0, 156/255, 166/255, 1
+                                    md_bg_color:226/255, 80/255, 16/255,1
+                                    #unfocus_color: 226/255, 80/255, 16/255,1
                                     #focus_color: 246/255, 159/255, 33/255,1
                                     elevation: 4
                                     shadow_softness: 8
@@ -330,7 +350,7 @@ MDScreenManager:
                                                 text_color: 1, 1, 1, 1  # White color
                                                 #pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                                 user_font_size: "64sp"  # Adjust the icon size
-                                                on_release: app.hell()
+                                                on_release: app.root.current = "second"
 
                                         AnchorLayout:
                                             anchor_x:'center'
@@ -338,7 +358,7 @@ MDScreenManager:
 
 
                                             MDLabel:
-                                                text: "dock"
+                                                text: "Terminate"
                                                 font_style: "H4"
                                                 font_size: '30dp'
                                                 size_hint: 1, 0.5
@@ -395,14 +415,11 @@ MDScreenManager:
                                     #on_release: app.adjust_volume()
                                     icon_size: "38dp"
                                     pos_hint: {'center_x': 0.3, 'center_y': 0.35}
-
             
-
-
             MDBoxLayout:                                                #for the bottom app bar
                 #orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color: "#009CA6"
+                md_bg_color: "#E25011"
 
                 MDGridLayout:
                     cols:5
@@ -552,12 +569,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="first_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -567,11 +584,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -597,7 +614,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -639,13 +656,13 @@ MDScreenManager:
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 #focus_behavior: True
-                                md_bg_color:0, 156/255, 166/255, 1
-                                #unfocus_color: 0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
                                 #focus_color: 246/255, 159/255, 33/255,1
                                 elevation: 4
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
-                                on_release: app.root.current="second_screen"
+                                on_release: app.root.current="third_screen"
                                 on_release: app.hel()
 
 
@@ -660,7 +677,7 @@ MDScreenManager:
                                         text_color: 1, 1, 1, 1  # White color
                                         pos_hint: {"center_x": .5, "center_y": .5}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
-                                        on_release: app.root.current = "second_screen"
+                                        on_release: app.root.current = "third_screen"
                                 AnchorLayout:
                                     anchor_x: 'center'
                                     anchor_y: 'bottom'
@@ -684,8 +701,8 @@ MDScreenManager:
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 #focus_behavior: True
-                                md_bg_color:0, 156/255, 166/255, 1
-                                #unfocus_color: 0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
                                 #focus_color: 246/255, 159/255, 33/255,1  
                                 elevation: 4
                                 shadow_softness: 8
@@ -773,7 +790,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 #orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1
+                md_bg_color:226/255, 80/255, 16/255,1
 
 
             
@@ -824,12 +841,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="second_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -839,11 +856,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -869,7 +886,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -904,8 +921,8 @@ MDScreenManager:
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 #focus_behavior: True
-                                md_bg_color:0, 156/255, 166/255, 1
-                                #unfocus_color: 0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
                                 #focus_color: 246/255, 159/255, 33/255,1
                                 elevation: 4
                                 shadow_softness: 8
@@ -950,8 +967,8 @@ MDScreenManager:
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 #focus_behavior: True
-                                md_bg_color:0, 156/255, 166/255, 1
-                                #unfocus_color: 0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
+                                #unfocus_color: 226/255, 80/255, 16/255,1
                                 #focus_color: 246/255, 159/255, 33/255,1  
                                 elevation: 4
                                 shadow_softness: 8
@@ -1034,7 +1051,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -1081,12 +1098,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="third_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -1096,11 +1113,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -1126,7 +1143,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -1162,8 +1179,8 @@ MDScreenManager:
                                 size_hint: 0.95, 0.9
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 #focus_behavior: True
-                                md_bg_color: "#009CA6"
-                                #unfocus_color: 0, 156/255, 166/255, 1
+                                md_bg_color: "#E25011"
+                                #unfocus_color: 226/255, 80/255, 16/255,1
                                 #focus_color: 246/255, 159/255, 33/255,1
                                 elevation: 4
                                 shadow_softness: 8
@@ -1183,7 +1200,7 @@ MDScreenManager:
                                 bold: True
                                 font_size: "18sp"
                                 theme_text_color: "Custom"
-                                md_bg_color: 0, 156/255, 166/255, 1
+                                md_bg_color: 226/255, 80/255, 16/255,1
                                 text_color: 240/255, 240/255, 240/255,1
                                 on_press: app.root.current = "fifth_screen"
 
@@ -1241,7 +1258,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -1288,12 +1305,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="fourth_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -1303,11 +1320,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -1333,7 +1350,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -1375,7 +1392,7 @@ MDScreenManager:
                                     radius: 30, 30, 30, 30
                                     size_hint: .6, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
-                                    md_bg_color:0, 156/255, 166/255, 1
+                                    md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
                                     on_release: app.root.current="record_screen"
@@ -1404,7 +1421,7 @@ MDScreenManager:
                                     radius: 30, 30, 30, 30
                                     size_hint: .6, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
-                                    md_bg_color:0, 156/255, 166/255, 1
+                                    md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
 
@@ -1428,7 +1445,7 @@ MDScreenManager:
                                     radius: 30, 30, 30, 30
                                     size_hint: .6, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
-                                    md_bg_color:0, 156/255, 166/255, 1
+                                    md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
 
@@ -1451,7 +1468,7 @@ MDScreenManager:
                                     radius: 30, 30, 30, 30
                                     size_hint:.6, .6
                                     pos_hint: {"center_x": .5, "center_y": .5}
-                                    md_bg_color:0, 156/255, 166/255, 1
+                                    md_bg_color:226/255, 80/255, 16/255,1
                                     shadow_softness: 8
                                     shadow_offset: (-2, 2)
 
@@ -1526,7 +1543,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -1572,12 +1589,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="fifth_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -1587,11 +1604,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -1617,7 +1634,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -1651,7 +1668,7 @@ MDScreenManager:
                                 radius: 46, 12, 46, 12
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
 
@@ -1674,7 +1691,7 @@ MDScreenManager:
                                 radius: 46, 12, 46, 12
                                 size_hint: .4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.show_popup()
@@ -1751,7 +1768,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -1797,12 +1814,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="third_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -1812,11 +1829,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300) 
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -1842,7 +1859,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -1874,7 +1891,7 @@ MDScreenManager:
                                 radius: 30, 30, 30, 30
                                 size_hint:.2, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_up()
@@ -1912,7 +1929,7 @@ MDScreenManager:
                                 radius: 30, 30, 30, 30
                                 size_hint:.4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_left()
@@ -1939,7 +1956,7 @@ MDScreenManager:
                                 radius: 30, 30, 30, 30
                                 size_hint:.4, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release: app.move_right()
@@ -1954,7 +1971,6 @@ MDScreenManager:
                                         size_hint: 1, 0.5
                                         theme_text_color: "Custom"
                                         text_color: 1, 1, 1, 1  # White color
-                                        md_bg_color: 
                                         pos_hint: {"center_x": .5, "center_y": .2}  # Center the icon
                                         user_font_size: "64sp"  # Adjust the icon size
                                         on_release: app.move_right()
@@ -1971,7 +1987,7 @@ MDScreenManager:
                                 radius: 30, 30, 30, 30
                                 size_hint:.2, .6
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                md_bg_color:0, 156/255, 166/255, 1
+                                md_bg_color:226/255, 80/255, 16/255,1
                                 shadow_softness: 8
                                 shadow_offset: (-2, 2)
                                 on_release:app.move_down()
@@ -2049,7 +2065,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -2094,12 +2110,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="second_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -2109,11 +2125,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
-                            width: dp(300)  
+                            width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -2139,7 +2155,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -2192,7 +2208,7 @@ MDScreenManager:
                             MDIconButton:
                                 icon: "loading"
                                 theme_text_color: "Custom"
-                                text_color: 0, 156/255, 166/255, 1 
+                                text_color: 226/255, 80/255, 16/255,1 
                                 halign: 'center'
                                 icon_size: "70dp"
                                 canvas.before:
@@ -2206,7 +2222,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
@@ -2249,12 +2265,12 @@ MDScreenManager:
                         MDIconButton:
                             icon: "arrow-left"
                             theme_text_color: "Custom"
-                            text_color: 0, 156/255, 166/255, 1 
+                            text_color: 226/255, 80/255, 16/255,1 
                             on_release: app.root.current="second_screen"
                             icon_size:"38dp"
 
                     
-                    AnchorLayout:                                               #for the 20240910_195634.png
+                    AnchorLayout:                                               #for the logo
                         anchor_x: 'center'
                         anchor_y: 'center'
                         padding: [dp(10), 0, dp(10), 0]  # Adjust the padding here
@@ -2264,11 +2280,11 @@ MDScreenManager:
                         
 
                         Image:
-                            source: '20240910_195634.png'   
+                            source: 'crobot2.ef487cbd588e5a44605e.png'   
                             size_hint_x: None
                             width: dp(110) 
 
-                    AnchorLayout:                                               #for the 20240910_195634.png button
+                    AnchorLayout:                                               #for the sos button
                         anchor_x: 'right'
                         anchor_y: 'center'
                         padding: [0, 0, dp(10), 0] 
@@ -2294,7 +2310,7 @@ MDScreenManager:
                                 bold: True
                                 font_style: "Body2"
                                 theme_text_color: "Custom"
-                                text_color: 0/255, 156/255, 166/255, 1
+                                text_color: 226/255, 80/255, 16/255, 1
                                 size_hint_y: None
                                 height: self.texture_size[1] if self.text else 0
 
@@ -2322,7 +2338,7 @@ MDScreenManager:
                             anchor_y: 'center'
                             MDTextField:
                                 id: user
-                                hint_text: "Enter Password"
+                                hint_text: "Enter password"
                                 icon_right: "eye-off"
                                 size_hint_x: None
                                 width: 200
@@ -2338,11 +2354,10 @@ MDScreenManager:
                             anchor_x: 'center'
                          
                             MDRoundFlatButton:
-                                text: "[b]Submit[/b]"
-                                text_color: "white"
+                                text: "submit"
+                                text_color: "black"
                                 size_hint: None, None
                                 size: 150, 40
-                                md_bg_color: 0, 156/255, 166/255, 1
                                 on_press:app.wifi_pass()
 
                                  
@@ -2350,7 +2365,7 @@ MDScreenManager:
             MDBoxLayout:                                                #for the bottom app bar
                 orientation:"horizontal"
                 size_hint: 1, 0.1
-                md_bg_color:0, 156/255, 166/255, 1 
+                md_bg_color:226/255, 80/255, 16/255,1 
 
             
                 AnchorLayout:
